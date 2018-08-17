@@ -12,11 +12,12 @@ source:
   sha256: {{ sha256 }}
   patches:
     # fix bug in allowing user to set SASL path
-    - with-sasl.patch
+    - with-sasl.patch  # [not win]
+    # fix similar bug in allowing user to set GSSAPI path
+    - with-gssapi.patch  # [win]
 
 build:
-  number: 0
-  skip: true  # [win]
+  number: 1
 
 requirements:
   build:
@@ -26,13 +27,15 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - libcurl
-    - cyrus-sasl
+    - krb5  # [win]
+    - cyrus-sasl  # [not win]
   run:
-    - cyrus-sasl
+    - krb5  # [win]
+    - cyrus-sasl  # [not win]
 
 test:
   commands:
-    - nds-client-config --includedir --libdir
+    - nds-client-config --includedir --libdir  # [not win]
     - nds_query --version
 
 about:

@@ -1,0 +1,20 @@
+diff --git config/cmake/Modules/FindGSSAPI.cmake config/cmake/Modules/FindGSSAPI.cmake
+index 936b6b6..cc8315e 100644
+--- config/cmake/Modules/FindGSSAPI.cmake
++++ config/cmake/Modules/FindGSSAPI.cmake
+@@ -35,13 +35,13 @@ ELSEIF( "${WITH_GSSAPI}" MATCHES "^." )
+   #             PATHS /usr/lib )
+   IF (WIN32)
+     IF (CMAKE_CL_64)
+-      SET(GSSAPI_LIBRARY "${WITH_GSSAPI}/lib/amd64/gssapi64.lib")
++      SET(GSSAPI_LIBRARY "${WITH_GSSAPI}/lib/gssapi64.lib")
+     ELSE (CMAKE_CL_64)
+-      SET(GSSAPI_LIBRARY "${WITH_GSSAPI}/lib/i386/gssapi32.lib")
++      SET(GSSAPI_LIBRARY "${WITH_GSSAPI}/lib/gssapi32.lib")
+     ENDIF (CMAKE_CL_64)
+   ELSE (WIN32)
+     FIND_LIBRARY(GSSAPI_LIBRARY NAMES krb5_32 krb524 gssapi_krb5
+-               PATHS "/usr/lib" "${WITH_GSSAPI}/lib" )
++               PATHS "${WITH_GSSAPI}/lib" "/usr/lib" )
+   ENDIF (WIN32)
+ ELSE( ${WITH_GSSAPI_NO} )

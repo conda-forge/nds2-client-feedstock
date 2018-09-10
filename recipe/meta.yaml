@@ -17,8 +17,8 @@ source:
     - with-gssapi.patch  # [win]
 
 build:
-  number: 1
-  skip: true  # [win and vc<10]
+  number: 2
+  skip: true  # [win and vc<14]
 
 requirements:
   build:

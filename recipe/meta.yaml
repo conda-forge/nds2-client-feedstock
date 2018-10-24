@@ -10,11 +10,6 @@ source:
   fn: {{ name }}-{{ version }}.tar.xz
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # fix bug in allowing user to set SASL path
-    - with-sasl.patch  # [not win]
-    # fix similar bug in allowing user to set GSSAPI path
-    - with-gssapi.patch  # [win]
 
 build:
   number: 1000

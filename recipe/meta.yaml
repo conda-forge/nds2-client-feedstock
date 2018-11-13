@@ -1,6 +1,6 @@
 {% set name = "nds2-client" %}
-{% set version = "0.16.0" %}
-{% set sha256 = "34539f905428493c1a02a208fce0356dec5c8310bac90a83fa20d0d5ad1040d7" %}
+{% set version = "0.16.2" %}
+{% set sha256 = "485ce5cc1650f384897e5ddcd259ad2f4f6b63e309372990b997d86b54cf529e" %}
 
 package:
   name: {{ name }}
@@ -10,15 +10,10 @@ source:
   fn: {{ name }}-{{ version }}.tar.xz
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # fix bug in allowing user to set SASL path
-    - with-sasl.patch  # [not win]
-    # fix similar bug in allowing user to set GSSAPI path
-    - with-gssapi.patch  # [win]
 
 build:
-  number: 1002
-  skip: true  # [win and vc<14]
+  number: 1000
+  skip: true  # [win]
 
 requirements:
   build:

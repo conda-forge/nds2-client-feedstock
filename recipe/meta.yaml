@@ -1,6 +1,6 @@
 {% set name = "nds2-client" %}
-{% set version = "0.16.2" %}
-{% set sha256 = "485ce5cc1650f384897e5ddcd259ad2f4f6b63e309372990b997d86b54cf529e" %}
+{% set version = "0.16.3" %}
+{% set sha256 = "632f943052e6cbfaa9e13272c72c25b5e202cb6baaecdffdee90b3f6eba02767" %}
 
 package:
   name: {{ name }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1000
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -44,6 +44,10 @@ about:
   description: |
     The NDS2 client interface allows the user to down-load LIGO data
     from V1 and V2 LIGO Network Data Servers.
+
+    This package only provides the low-level C/C++ client and associated
+    binaries.  If you want to install the Python bindings, please install
+    the python-nds2-client package.
 
 extra:
   recipe-maintainers:

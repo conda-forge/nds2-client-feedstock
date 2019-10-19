@@ -1,6 +1,6 @@
 {% set name = "nds2-client" %}
-{% set version = "0.16.3" %}
-{% set sha256 = "632f943052e6cbfaa9e13272c72c25b5e202cb6baaecdffdee90b3f6eba02767" %}
+{% set version = "0.16.4" %}
+{% set sha256 = "bca6f96583c6710726ea318ac2feb9db3e7e7c9703e019366d1b4ee6f7a4ee87" %}
 
 package:
   name: {{ name }}

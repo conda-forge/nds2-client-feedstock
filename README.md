@@ -1,9 +1,9 @@
 About nds2-client
 =================
 
-Home: https://wiki.ligo.org/DASWG/NDSClient
+Home: https://wiki.ligo.org/Computing/NDSClient
 
-Package license: GPLv3
+Package license: GPL-3.0-or-later
 
 Feedstock license: BSD 3-Clause
 

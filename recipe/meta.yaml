@@ -25,6 +25,7 @@ requirements:
     - cmake >=3.6
     - make  # [unix]
   host:
+    - boost-cpp
     - cyrus-sasl  # [not win]
     - krb5  # [win]
   run:

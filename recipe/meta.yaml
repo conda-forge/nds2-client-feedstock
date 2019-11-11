@@ -11,27 +11,33 @@ source:
   sha256: "{{ sha256 }}"
 
 build:
+  error_overdepending: true
+  error_overlinking: true
   number: 0
+  run_exports:
+    - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
   skip: true  # [win]
 
 requirements:
   build:
-    - make
-    - cmake >=3.6
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - cmake >=3.6
+    - make  # [unix]
   host:
-    - libcurl
-    - krb5  # [win]
     - cyrus-sasl  # [not win]
+    - krb5  # [win]
   run:
-    - krb5  # [win]
     - cyrus-sasl  # [not win]
+    - krb5  # [win]
 
 test:
+  requires:
+    - pkg-config  # [unix]
   commands:
     - nds-client-config --includedir --libdir  # [not win]
     - nds_query --version
+    - pkg-config --print-errors --modversion nds2-client libndscxx conlibndscxx nds-client-tester  # [unix]
 
 about:
   home: "https://wiki.ligo.org/Computing/NDSClient"

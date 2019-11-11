@@ -1,46 +1,51 @@
 {% set name = "nds2-client" %}
-{% set version = "0.16.3" %}
-{% set sha256 = "632f943052e6cbfaa9e13272c72c25b5e202cb6baaecdffdee90b3f6eba02767" %}
+{% set version = "0.16.4" %}
+{% set sha256 = "bca6f96583c6710726ea318ac2feb9db3e7e7c9703e019366d1b4ee6f7a4ee87" %}
 
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
 
 source:
-  fn: {{ name }}-{{ version }}.tar.xz
-  url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz"
+  sha256: "{{ sha256 }}"
 
 build:
+  error_overdepending: true
+  error_overlinking: true
   number: 0
+  run_exports:
+    - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
   skip: true  # [win]
 
 requirements:
   build:
-    - make
-    - cmake >=3.6
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - cmake >=3.6
+    - make  # [unix]
   host:
-    - libcurl
-    - krb5  # [win]
+    - boost-cpp
     - cyrus-sasl  # [not win]
+    - krb5  # [win]
   run:
-    - krb5  # [win]
     - cyrus-sasl  # [not win]
+    - krb5  # [win]
 
 test:
+  requires:
+    - pkg-config  # [unix]
   commands:
     - nds-client-config --includedir --libdir  # [not win]
     - nds_query --version
+    - pkg-config --print-errors --modversion nds2-client libndscxx conlibndscxx nds-client-tester  # [unix]
 
 about:
-  home: https://wiki.ligo.org/DASWG/NDSClient
-  doc_url: https://nds.docs.ligo.org/nds2-client/Beta/User/html/
-  license: GPLv3
-  license_family: GPL
-  license_file: COPYING
-  summary: NDS2 Client interface
+  home: "https://wiki.ligo.org/Computing/NDSClient"
+  license: "GPL-3.0-or-later"
+  license_family: "GPL"
+  license_file: "COPYING"
+  summary: "NDS2 Client interface"
   description: |
     The NDS2 client interface allows the user to down-load LIGO data
     from V1 and V2 LIGO Network Data Servers.

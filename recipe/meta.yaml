@@ -1,19 +1,19 @@
 {% set name = "nds2-client" %}
-{% set version = "0.16.4" %}
-{% set sha256 = "bca6f96583c6710726ea318ac2feb9db3e7e7c9703e019366d1b4ee6f7a4ee87" %}
+{% set version = "0.16.5" %}
+{% set sha256 = "9c10f4701aa920d81cb95b795a7476f5adc5f2dfdc4a9fb436a08110327ab2fb" %}
 
 package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz"
+  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2"
   sha256: "{{ sha256 }}"
 
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 2
+  number: 0
   run_exports:
     - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
   skip: true  # [win]

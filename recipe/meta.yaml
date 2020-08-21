@@ -1,19 +1,19 @@
 {% set name = "nds2-client" %}
-{% set version = "0.16.5" %}
-{% set sha256 = "9c10f4701aa920d81cb95b795a7476f5adc5f2dfdc4a9fb436a08110327ab2fb" %}
+{% set version = "0.16.6" %}
+{% set sha256 = "a6d83cc0f96f63ca7e045f3923dc178ad48a4869d61d5e2086d184c7965e5e15" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2"
-  sha256: "{{ sha256 }}"
+  url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2
+  sha256: {{ sha256 }}
 
 build:
   error_overdepending: true
   error_overlinking: true  # [not win]
-  number: 1
+  number: 0
   run_exports:
     - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
 
@@ -40,11 +40,11 @@ test:
     - pkg-config --print-errors --modversion nds2-client libndscxx conlibndscxx nds-client-tester  # [unix]
 
 about:
-  home: "https://wiki.ligo.org/Computing/NDSClient"
-  license: "GPL-3.0-or-later"
-  license_family: "GPL"
-  license_file: "COPYING"
-  summary: "NDS2 Client interface"
+  home: https://wiki.ligo.org/Computing/NDSClient
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: COPYING
+  summary: NDS2 Client interface
   description: |
     The NDS2 client interface allows the user to down-load LIGO data
     from V1 and V2 LIGO Network Data Servers.

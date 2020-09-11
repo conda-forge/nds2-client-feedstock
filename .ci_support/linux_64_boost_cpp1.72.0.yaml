@@ -1,21 +1,21 @@
-CMAKE_GENERATOR:
-- NMake Makefiles
 boost_cpp:
-- '1.72'
+- 1.72.0
 c_compiler:
-- vs2017
+- gcc
+c_compiler_version:
+- '7'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
-krb5:
-- 1.17.1
+- gxx
+cxx_compiler_version:
+- '7'
+docker_image:
+- condaforge/linux-anvil-comp7
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
-  krb5:
-    max_pin: x.x
 target_platform:
-- win-64
+- linux-64

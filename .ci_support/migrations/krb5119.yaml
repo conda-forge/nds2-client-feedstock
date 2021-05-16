@@ -3,5 +3,5 @@ __migrator:
   kind: version
   migration_number: 1
 krb5:
-- 1.17.1
-migrator_ts: 1584168396.450607
+- '1.19'
+migrator_ts: 1620874178.9032087

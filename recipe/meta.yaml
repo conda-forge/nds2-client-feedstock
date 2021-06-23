@@ -1,6 +1,6 @@
 {% set name = "nds2-client" %}
-{% set version = "0.16.6" %}
-{% set sha256 = "a6d83cc0f96f63ca7e045f3923dc178ad48a4869d61d5e2086d184c7965e5e15" %}
+{% set version = "0.16.7" %}
+{% set sha256 = "3d800c91aa7de328baf356d4a9e49a8eb53c0c7f5bbfa9423d2cd717a476c306" %}
 
 package:
   name: {{ name|lower }}
@@ -13,7 +13,7 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true  # [not win]
-  number: 2
+  number: 0
   run_exports:
     - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
 

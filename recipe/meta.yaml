@@ -23,6 +23,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake >=3.6
     - make  # [unix]
+    - python
   host:
     - boost-cpp
     - cyrus-sasl  # [not win]
@@ -35,9 +36,14 @@ test:
   requires:
     - pkg-config  # [unix]
   commands:
-    - nds-client-config --includedir --libdir  # [not win]
+    # check executables
     - nds_query --version
-    - pkg-config --print-errors --modversion nds2-client libndscxx conlibndscxx nds-client-tester  # [unix]
+    - nds-client-config --includedir --libdir  # [not win]
+    # check pkg-=config
+    - pkg-config --print-errors --exact-version {{ version }} nds2-client  # [unix]
+    - pkg-config --print-errors --exact-version {{ version }} libndscxx  # [unix]
+    - pkg-config --print-errors --exact-version {{ version }} conlibndscxx  # [unix]
+    - pkg-config --print-errors --exact-version {{ version }} nds-client-tester  # [unix]
 
 about:
   home: https://wiki.ligo.org/Computing/NDSClient

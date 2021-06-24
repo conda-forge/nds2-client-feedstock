@@ -1,22 +1,24 @@
 #!/bin/bash
 
-mkdir -p build
-pushd build
+set -ex
 
-cmake .. \
-    -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-    -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=true \
-    -DCMAKE_INSTALL_LIBDIR="lib" \
-    -DWITH_SASL=${PREFIX} \
-    -DWITH_GSSAPI=no \
-    -DPYTHON=false \
-    -DPYTHON_EXECUTABLE=false \
-    -DCMAKE_INSTALL_SYSCONFDIR=${PREFIX}/etc \
-    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-    -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+mkdir -p _build
+pushd _build
 
-cmake --build . --config Release -- -j${CPU_COUNT}
-ctest -V
-cmake --build . -- install
+# configure
+cmake \
+	${SRC_DIR} \
+	${CMAKE_ARGS} \
+	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+	-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=true \
+	-DWITH_GSSAPI=no \
+	-DWITH_SASL=${PREFIX} \
 
-popd
+# build
+cmake --build . --parallel ${CPU_COUNT} --verbose
+
+# test
+ctest --parallel ${CPU_COUNT} --verbose
+
+# install
+cmake --build . --parallel ${CPU_COUNT} --verbose --target install

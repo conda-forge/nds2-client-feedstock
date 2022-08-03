@@ -9,9 +9,6 @@ package:
 source:
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2
   sha256: {{ sha256 }}
-  patches:
-    # workaround https://git.ligo.org/nds/nds2-client/-/issues/124
-    - catch-trap-osx-arm64.patch  # [osx and arm64]
 
 build:
   error_overdepending: true

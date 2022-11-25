@@ -9,11 +9,14 @@ package:
 source:
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2
   sha256: {{ sha256 }}
+  patches:
+    # see https://git.ligo.org/duncanmmacleod/nds2-client/-/commits/client-conda-patches
+    - 0001-disable-building-static-libraries.patch
 
 build:
   error_overdepending: true
   error_overlinking: true  # [not win]
-  number: 1
+  number: 2
   run_exports:
     - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
 

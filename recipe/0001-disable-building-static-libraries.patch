@@ -1,0 +1,66 @@
+From f52db42a0a0ac0c6baa3ca55c120205ffa79e3cb Mon Sep 17 00:00:00 2001
+From: "duncan.macleod" <duncan.macleod@ligo.org>
+Date: Fri, 25 Nov 2022 09:32:06 +0000
+Subject: [PATCH] disable building static libraries
+
+---
+ client/src/client/CMakeLists.txt           |  6 ------
+ client/src/libndscxx/module/CMakeLists.txt | 18 ------------------
+ 2 files changed, 24 deletions(-)
+
+diff --git a/client/src/client/CMakeLists.txt b/client/src/client/CMakeLists.txt
+index 3c841dc..7593616 100644
+--- a/client/src/client/CMakeLists.txt
++++ b/client/src/client/CMakeLists.txt
+@@ -95,12 +95,6 @@ cmake_policy(SET CMP0003 NEW)
+ add_library(ndsclient SHARED ${ndsclient_srcs})
+ target_link_libraries(ndsclient ${CMAKE_THREAD_LIBS_INIT})
+ set( install_libs ndsclient )
+-add_library(ndsclientStatic STATIC ${ndsclient_srcs})
+-target_link_libraries(ndsclientStatic ${CMAKE_THREAD_LIBS_INIT})
+-if( UNIX )
+-  set( install_libs ${install_libs} ndsclientStatic )
+-  set_target_properties(ndsclientStatic PROPERTIES OUTPUT_NAME ndsclient)
+-endif( UNIX )
+ cmake_policy(POP)
+ 
+ target_link_libraries(ndsclient ${optionalLibs})
+diff --git a/client/src/libndscxx/module/CMakeLists.txt b/client/src/libndscxx/module/CMakeLists.txt
+index a9fba01..c15c79b 100644
+--- a/client/src/libndscxx/module/CMakeLists.txt
++++ b/client/src/libndscxx/module/CMakeLists.txt
+@@ -77,17 +77,6 @@ set_target_properties(
+       C_STANDARD 99
+       COMPILE_DEFINITIONS "NDS_EXPORT=1" )
+ set( install_libs ndscxx )
+-add_library(
+-  ndscxxStatic
+-  STATIC ${ndscxx_srcs} ${ndscxx_hdrs}
+-)
+-target_requires_cpp11( ndscxxStatic PUBLIC )
+-target_link_libraries( ndscxxStatic PUBLIC ndsclient ${CMAKE_DL_LIBS} )
+-target_link_libraries( ndscxxStatic PRIVATE nds::impl )
+-set_target_properties(
+-  ndscxxStatic
+-  PROPERTIES
+-      COMPILE_DEFINITIONS "NDS_EXPORT=1" )
+ add_library(
+     ndscxx_obj
+     OBJECT ${ndscxx_srcs} ${ndscxx_hdrs}
+@@ -108,13 +97,6 @@ set_target_properties(
+   ndscxx PROPERTIES
+   OUTPUT_NAME ndscxx
+ )
+-if( UNIX )
+-  set_target_properties(
+-    ndscxxStatic PROPERTIES
+-    OUTPUT_NAME ndscxx
+-  )
+-  set( install_libs ${install_libs} ndscxxStatic )
+-endif( UNIX )
+ 
+ set( NDSCXX_SOVERSION_CURRENT  1 )
+ set( NDSCXX_SOVERSION_REVISION 3 )
+-- 
+2.38.1
+

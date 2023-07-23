@@ -16,7 +16,7 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true  # [not win]
-  number: 3
+  number: 4
   run_exports:
     - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
 

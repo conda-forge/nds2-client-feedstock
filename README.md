@@ -1,11 +1,11 @@
-About nds2-client
-=================
+About nds2-client-feedstock
+===========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nds2-client-feedstock/blob/main/LICENSE.txt)
 
 Home: https://wiki.ligo.org/Computing/NDSClient
 
 Package license: GPL-3.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nds2-client-feedstock/blob/main/LICENSE.txt)
 
 Summary: NDS2 Client interface
 

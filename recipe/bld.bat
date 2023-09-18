@@ -19,7 +19,7 @@ cmake --build . --parallel "%CPU_COUNT%" --verbose
 if errorlevel 1 exit 1
 
 :: test
-ctest --parallel "%CPU_COUNT%" --verbose
+ctest --parallel "%CPU_COUNT%" --verbose -C "Debug"
 if errorlevel 1 exit 1
 
 :: install

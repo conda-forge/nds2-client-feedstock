@@ -16,7 +16,7 @@ source:
 build:
   error_overdepending: true  # [not win]
   error_overlinking: true  # [not win]
-  number: 5
+  number: 6
   run_exports:
     - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
 
@@ -28,7 +28,7 @@ requirements:
     - make  # [unix]
     - python
   host:
-    - boost-cpp
+    - libboost-headers
     - cyrus-sasl  # [not win]
     - krb5  # [win]
   run:

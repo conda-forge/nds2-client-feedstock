@@ -5,7 +5,7 @@ cd _build
 :: configure
 cmake ^
 	"%SRC_DIR%" ^
-	-G "%CMAKE_GENERATOR%" ^
+	-G "NMake Makefiles" ^
 	-DCMAKE_BUILD_TYPE:STRING=Release ^
 	-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:BOOL=true ^
 	-DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^

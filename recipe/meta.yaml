@@ -16,13 +16,14 @@ source:
 build:
   error_overdepending: true  # [not win]
   error_overlinking: true  # [not win]
-  number: 7
+  number: 8
   run_exports:
     - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cmake >=3.6
     - make  # [unix]

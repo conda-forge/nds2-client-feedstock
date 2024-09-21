@@ -1,7 +1,7 @@
-From f52db42a0a0ac0c6baa3ca55c120205ffa79e3cb Mon Sep 17 00:00:00 2001
+From 36127f130969a3865aa7ff43a9fbc5e128a646b4 Mon Sep 17 00:00:00 2001
 From: "duncan.macleod" <duncan.macleod@ligo.org>
 Date: Fri, 25 Nov 2022 09:32:06 +0000
-Subject: [PATCH] disable building static libraries
+Subject: [PATCH 1/2] disable building static libraries
 
 ---
  client/src/client/CMakeLists.txt           |  6 ------
@@ -62,5 +62,5 @@ index a9fba01..c15c79b 100644
  set( NDSCXX_SOVERSION_CURRENT  1 )
  set( NDSCXX_SOVERSION_REVISION 3 )
 -- 
-2.38.1
+2.39.2
 

@@ -1,0 +1,24 @@
+From fd52a680cb787ea13bb972bdcf3e336177e625f2 Mon Sep 17 00:00:00 2001
+From: Duncan Macleod <macleoddm@cardiff.ac.uk>
+Date: Sat, 21 Sep 2024 20:57:26 +0100
+Subject: [PATCH 2/2] nds_channel.hh: add missing cstdint include
+
+---
+ client/src/libndscxx/module/nds_channel.hh | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/client/src/libndscxx/module/nds_channel.hh b/client/src/libndscxx/module/nds_channel.hh
+index 3aa99ce..22bac9b 100644
+--- a/client/src/libndscxx/module/nds_channel.hh
++++ b/client/src/libndscxx/module/nds_channel.hh
+@@ -7,6 +7,7 @@
+ #include <ctime>
+ 
+ #include <complex>
++#include <cstdint>
+ #include <memory>
+ #include <string>
+ #include <ostream>
+-- 
+2.39.2
+

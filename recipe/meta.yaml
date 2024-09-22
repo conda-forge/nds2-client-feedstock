@@ -10,19 +10,21 @@ source:
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2
   sha256: {{ sha256 }}
   patches:
-    # see https://git.ligo.org/duncanmmacleod/nds2-client/-/commits/client-conda-patches
     - 0001-disable-building-static-libraries.patch
+    # backport https://git.ligo.org/nds/nds2-client/-/merge_requests/136
+    - 0002-nds_channel.hh-add-missing-cstdint-include.patch
 
 build:
   error_overdepending: true  # [not win]
   error_overlinking: true  # [not win]
-  number: 7
+  number: 8
   run_exports:
     - {{ pin_subpackage("nds2-client", max_pin="x.x") }}
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cmake >=3.6
     - make  # [unix]

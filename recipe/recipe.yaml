@@ -1,0 +1,74 @@
+schema_version: 1
+
+context:
+  name: nds2-client
+  version: 0.16.8
+
+package:
+  name: nds2-client
+  version: ${{ version }}
+
+source:
+  url: http://software.ligo.org/lscsoft/source/nds2-client-${{ version }}.tar.bz2
+  sha256: c81fac7925f4b4c9454e80e72a0d8ec9af585d9c15d31aba10e323aa257ad636
+  patches:
+    - 0001-disable-building-static-libraries.patch
+    # backport https://git.ligo.org/nds/nds2-client/-/merge_requests/136
+    - 0002-nds_channel.hh-add-missing-cstdint-include.patch
+
+build:
+  dynamic_linking:
+    overdepending_behavior: error
+  number: 11
+  script: build
+
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler("cxx") }}
+    - cmake >=3.6
+    - if: unix
+      then: make
+    - python >=3.6,<3.12.0a0
+  host:
+    - libboost-headers
+    - if: win
+      then: krb5
+      else: cyrus-sasl
+  run_exports:
+    - ${{ pin_subpackage("nds2-client", upper_bound="x.x") }}
+
+tests:
+  - requirements:
+      run:
+        - if: unix
+          then: pkg-config
+    script:
+      - nds_query --version
+      - if: unix
+        then:
+          - nds-client-config --includedir --libdir
+          - pkg-config --print-errors --exact-version ${{ version }} nds2-client
+          - pkg-config --print-errors --exact-version ${{ version }} libndscxx
+          - pkg-config --print-errors --exact-version ${{ version }} conlibndscxx
+          - pkg-config --print-errors --exact-version ${{ version }} nds-client-tester
+
+about:
+  summary: NDS2 Client interface
+  description: |
+    The NDS2 client interface allows the user to down-load LIGO data
+    from V1 and V2 LIGO Network Data Servers.
+
+    This package only provides the low-level C/C++ client and associated
+    binaries.  If you want to install the Python bindings, please install
+    the python-nds2-client package.
+  homepage: https://wiki.ligo.org/Computing/NDSClient
+  repository: https://git.ligo.org/nds/nds2-client
+  license: GPL-3.0-or-later
+  license_file: COPYING
+
+extra:
+  recipe-maintainers:
+    - duncanmmacleod
+    - emaros

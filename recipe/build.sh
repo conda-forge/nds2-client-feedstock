@@ -5,6 +5,11 @@ set -ex
 mkdir -p _build
 pushd _build
 
+# set Python for tests
+# (rattler-build sets it to the host Python,
+#  which is not available in the build environment)
+export PYTHON=${BUILD_PREFIX}/bin/python
+
 # configure
 cmake \
   ${CMAKE_ARGS} \

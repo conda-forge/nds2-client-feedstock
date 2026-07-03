@@ -2,6 +2,11 @@ rem -- use local build folder
 mkdir _build
 cd _build
 
+rem -- set Python for tests
+rem -- (rattler-build sets it to the host Python,
+rem --  which is not available in the build environment)
+set PYTHON=%BUILD_PREFIX%/python.exe
+
 rem -- configure
 cmake ^
   %CMAKE_ARGS% ^

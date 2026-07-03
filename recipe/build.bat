@@ -1,28 +1,27 @@
-:: use local build folder
+rem -- use local build folder
 mkdir _build
 cd _build
 
-:: configure
+rem -- configure
 cmake ^
-	"%SRC_DIR%" ^
-	-G "NMake Makefiles" ^
-	-DCMAKE_BUILD_TYPE:STRING=Release ^
-	-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:BOOL=true ^
-	-DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
-	-DCMAKE_INSTALL_SYSCONFDIR:PATH="%LIBRARY_PREFIX%\etc" ^
-	-DCMAKE_POLICY_VERSION_MINIMUM:STRING=3.5 ^
-	-DWITH_GSSAPI:PATH="%LIBRARY_PREFIX%" ^
-	-DWITH_SASL=no
-if errorlevel 1 exit 1
+  %CMAKE_ARGS% ^
+  -G "NMake Makefiles" ^
+  -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:BOOL=true ^
+  -DCMAKE_INSTALL_SYSCONFDIR:PATH="%LIBRARY_PREFIX%\etc" ^
+  -DCMAKE_POLICY_VERSION_MINIMUM:STRING=3.5 ^
+  -DWITH_GSSAPI:PATH="%LIBRARY_PREFIX%" ^
+  -DWITH_SASL=no ^
+  "%SRC_DIR%"
+if %ERRORLEVEL% neq 0 exit 1
 
-:: build
+rem -- build
 cmake --build . --parallel "%CPU_COUNT%" --verbose
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1
 
-:: test
+rem -- test
 ctest --parallel "%CPU_COUNT%" --verbose -C "Debug"
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1
 
-:: install
+rem -- install
 cmake --build . --parallel "%CPU_COUNT%" --verbose --target install
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1

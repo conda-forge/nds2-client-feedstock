@@ -5,15 +5,19 @@ set -ex
 mkdir -p _build
 pushd _build
 
+# set Python for tests
+# (rattler-build sets it to the host Python,
+#  which is not available in the build environment)
+export PYTHON=${BUILD_PREFIX}/bin/python
+
 # configure
 cmake \
-	${SRC_DIR} \
-	${CMAKE_ARGS} \
-	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=true \
-	-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-	-DWITH_GSSAPI=no \
-	-DWITH_SASL=${PREFIX} \
+  ${CMAKE_ARGS} \
+  -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=true \
+  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+  -DWITH_GSSAPI=no \
+  -DWITH_SASL=${PREFIX} \
+  ${SRC_DIR}
 
 # build
 cmake --build . --parallel ${CPU_COUNT} --verbose

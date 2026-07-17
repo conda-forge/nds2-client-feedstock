@@ -11,6 +11,6 @@ cxx_compiler:
 krb5:
 - '1.22'
 libboost_headers:
-- '1.88'
+- '1.90'
 target_platform:
 - win-64

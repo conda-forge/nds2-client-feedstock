@@ -9,13 +9,14 @@ Package license: GPL-3.0-or-later
 
 Summary: NDS2 Client interface
 
+Development: https://git.ligo.org/nds/nds2-client
+
 The NDS2 client interface allows the user to down-load LIGO data
 from V1 and V2 LIGO Network Data Servers.
 
 This package only provides the low-level C/C++ client and associated
 binaries.  If you want to install the Python bindings, please install
 the python-nds2-client package.
-
 
 Current build status
 ====================
